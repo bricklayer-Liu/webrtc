@@ -1,11 +1,11 @@
-#云服务器搭建Janus Server & chrome直播树莓派摄像头采集的视频
+# 云服务器搭建Janus Server & chrome直播树莓派摄像头采集的视频
 
-###开放端口
+### 开放端口
     TCP: 443, 3478, 8080, 8089, 8188, 8989
     UDP: 3478, 30000-60000
 
 
-###1、安装依赖
+### 1、安装依赖
 ```shell script
     yum install libmicrohttpd-devel jansson-devel \
        openssl-devel libsrtp-devel sofia-sip-devel glib2-devel \
@@ -15,7 +15,7 @@
     yum install gnutls gnutls-deve
 
 ```
-###2、安装WebSocket
+### 2、安装WebSocket
 ```shell script
     git clone https://github.com/warmcat/libwebsockets.git
     
@@ -33,7 +33,7 @@
     
     make && sudo make install
 ```
-###3、安装 libsrtp
+### 3、安装 libsrtp
 ```shell script
     wget https://github.com/cisco/libsrtp/archive/v2.2.0.tar.gz
     
@@ -45,7 +45,7 @@
     
     make shared_library && sudo make install
 ```
-###4、安装libusrsctp(支持--enable-data-channels)
+### 4、安装libusrsctp(支持--enable-data-channels)
 ```shell script
     git clone https://github.com/Kurento/libusrsctp.git
     
@@ -59,7 +59,7 @@
     
     sudo make install
 ```
-###5、安装libmicrohttpd(支持--enable-rest)
+### 5、安装libmicrohttpd(支持--enable-rest)
 ```shell script
     wget https://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.9.71.tar.gz
     
@@ -73,7 +73,7 @@
     
     sudo make install
  ```   
-###5 安装libnice
+### 5 安装libnice
 ```shell script
     先安装python3环境,
      pip3 install --user meson
@@ -83,7 +83,7 @@
     meson --prefix=/usr build && ninja -C build && sudo ninja -C build install
 
 ```
-###6、编译 Janus
+### 6、编译 Janus
 ```shell script
     git clone https://github.com/meetecho/janus-gateway.git
     
@@ -99,7 +99,7 @@
     
     sudo make install
 ```
-###7、安装nginx
+### 7、安装nginx
 ```shell script
     wget http://nginx.org/download/nginx-1.15.8.tar.gz
     
@@ -113,7 +113,7 @@
     
     sudo make install 
 ```
-###8、生成证书
+### 8、生成证书
 ```shell script
     mkdir -p ~/cert
     cd ~/cert
@@ -147,7 +147,7 @@
         }
     }
 ```
-###10、安装coturn
+### 10、安装coturn
 ```shell script
     #git clone https://github.com/coturn/coturn 
     #cd coturn
@@ -161,7 +161,7 @@
     sudo make install
 ```    
 
-###11、修改janus配置文件
+### 11、修改janus配置文件
 
 ```shell script
 路径:/opt/janus/etc/janus
@@ -217,7 +217,7 @@ sudo cp janus.plugin.echotest.jcfg.sample janus.plugin.echotest.jcfg
         cert_pem = "/root/cert/cert.pem"
         cert_key = "/root/cert/key.pem"
  ```   
-###12、运行服务器
+### 12、运行服务器
 ```shell script
     /usr/local/nginx/sbin/nginx
     nohup turnserver -L 0.0.0.0 --min-port 30000 --max-port 60000  -a -u lyx:123456 -v -f -r nort.gov &
@@ -225,7 +225,7 @@ sudo cp janus.plugin.echotest.jcfg.sample janus.plugin.echotest.jcfg
  ```   
   
     
-##修改官方源码
+## 修改官方源码
     #安装包
     pip3 install aiohttp aiortc opencv-python websockets
     
